@@ -1,0 +1,17 @@
+FROM ubuntu
+MAINTAINER fmozo
+
+RUN apt-get -y update && \
+	apt-get -y install gnupg && \
+	apt-get -y install wget && \
+	wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | apt-key add - && \
+	echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-5.0.list > /dev/null
+
+RUN apt-get -y update && \
+	apt-get -y install mongodb-org && \
+	apt-get -y install sudo
+
+RUN useradd -m admin && echo "admin:centinela.53" | chpasswd && adduser admin sudo
+	
+USER admin
+CMD /bin/bash
