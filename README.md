@@ -7,5 +7,5 @@
 ### Docker build
 ```bash
 	cd {dockerfile_folder}
-	docker builda -t fmozo/{img_name} .
+	docker build -t fmozo/{img_name} .
 ```
